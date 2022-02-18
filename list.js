@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Image} from 'react-native';
 import styled from 'styled-components';
 
 const Wrapper = styled.View`
@@ -23,8 +23,14 @@ const Spell = styled.View`
 `;
 
 const SpellText = styled.Text`
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 10px;
+  color: #fff;
   font-size: 12px;
-  line-height: 14px;
+  background-color: #ffcb7d;
 `;
 
 const ListItem = styled.View`
@@ -64,6 +70,18 @@ const InfoText = styled.Text`
   color: #6d6d6d;
 `;
 
+const Button = styled.TouchableOpacity`
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 54px;
+  height: 54px;
+  border-radius: 27px;
+  background-color: #ffcb7d;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default function Splash() {
   return (
     <Wrapper>
@@ -92,6 +110,9 @@ export default function Splash() {
           </ItemBottom>
         </ListItem>
       </List>
+      <Button>
+        <Image source={require('./src/assets/images/plus.png')} />
+      </Button>
     </Wrapper>
   );
 }
