@@ -111,7 +111,7 @@ export default function Splash() {
         </ListItem>
       </List>
       <Button>
-        <Image source={require('./src/assets/images/plus.png')} />
+        <Image source={require('../assets/images/plus.png')} />
       </Button>
     </Wrapper>
   );
