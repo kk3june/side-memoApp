@@ -119,7 +119,7 @@ export default function Content() {
           <ItemHeaderWrapper>
             <ItemHeader>고아랑 정형외과</ItemHeader>
             <EditInfo>
-              <Image source={require('./src/assets/images/edit.png')} />
+              <Image source={require('../assets/images/edit.png')} />
             </EditInfo>
           </ItemHeaderWrapper>
           <ItemBottom>
@@ -154,7 +154,7 @@ export default function Content() {
         </History>
       </Section>
       <Button>
-        <Image source={require('./src/assets/images/pencil.png')} />
+        <Image source={require('../assets/images/pencil.png')} />
       </Button>
     </Wrapper>
   );
