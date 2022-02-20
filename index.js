@@ -5,6 +5,7 @@
 import {AppRegistry} from 'react-native';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import App from './list';
 =======
 import App from './splash';
@@ -12,6 +13,9 @@ import App from './splash';
 =======
 import App from './App';
 >>>>>>> 15e70e9 (ADD: install react-native-navigation library and dependencies)
+=======
+import App from './App';
+>>>>>>> c60ca5a (MERGE: branch dev into list)
 import {name as appName} from './app.json';
 
 AppRegistry.registerComponent(appName, () => App);
