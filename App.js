@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Splash from './splash';
+import Splash from './src/pages/splash';
 
 const Stack = createNativeStackNavigator();
 

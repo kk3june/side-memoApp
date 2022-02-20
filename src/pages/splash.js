@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Image} from 'react-native';
 import styled from 'styled-components';
 
 const Container = styled.View`
@@ -26,7 +25,7 @@ const AppName = styled.Text`
 export default function Splash() {
   return (
     <Container>
-      <LogoImg source={require('./src/assets/images/logo.png')} />
+      <LogoImg source={require('../assets/images/logo.png')} />
       <AppName>YOUNGMO</AppName>
     </Container>
   );
