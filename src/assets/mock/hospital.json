@@ -1,0 +1,39 @@
+```jsx
+GET http://{host}/api/hospital/list?uuid={uuid}
+
+#응답
+[
+  {
+    "ix": 1,
+    "conCode": 1,
+    "uuid": "D4F1DFD222CZZ",
+    "latitude": null,
+    "longitude": null,
+    "address_street": null,
+    "address_lot": null,
+    "address_code": null,
+    "name": "우리병원",
+    "manager": "한장호",
+    "contact1": "01056135430",
+    "contact2": null,
+    "regDt": "2022-02-09T00:00:00",
+    "uptDt": "2022-02-09T00:00:00"
+  },
+  {
+    "ix": 2,
+    "conCode": 2,
+    "uuid": "D4F1DFD222CZZ",
+    "latitude": null,
+    "longitude": null,
+    "address_street": null,
+    "address_lot": null,
+    "address_code": null,
+    "name": "나누리병원",
+    "manager": "한장호",
+    "contact1": "01056135430",
+    "contact2": null,
+    "regDt": "2022-02-09T00:00:00",
+    "uptDt": "2022-02-09T00:00:00"
+  }
+]
+```
