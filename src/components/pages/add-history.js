@@ -68,7 +68,7 @@ const SaveBtnTitle = styled.Text`
   color: #ffffff;
 `;
 
-export default function addHistory() {
+export default function AddHistory() {
   return (
     <Wrapper>
       <WrapperHeader>히스토리 입력</WrapperHeader>

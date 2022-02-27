@@ -8,7 +8,7 @@ const Wrapper = styled.View`
   background-color: #ffcb7d;
 `;
 
-const List = styled.View`
+const ListSection = styled.View`
   position: absolute;
   top: 59px;
   width: 100%;
@@ -33,7 +33,7 @@ const SpellText = styled.Text`
   background-color: #ffcb7d;
 `;
 
-const ListItem = styled.View`
+const ListItem = styled.TouchableOpacity`
   height: 65px;
   width: 100%;
   padding: 12px 10px;
@@ -82,15 +82,14 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export default function Splash() {
+export default function List({navigation}) {
   return (
     <Wrapper>
-      <List>
+      <ListSection>
         <Spell>
           <SpellText>ㄱ</SpellText>
         </Spell>
-
-        <ListItem>
+        <ListItem onPress={() => navigation.navigate('Content')}>
           <ItemHeader>고아랑 정형외과</ItemHeader>
           <ItemBottom>
             <Left>
@@ -109,9 +108,12 @@ export default function Splash() {
             </Right>
           </ItemBottom>
         </ListItem>
-      </List>
-      <Button>
-        <Image source={require('../assets/images/plus.png')} />
+      </ListSection>
+      <Button
+        onPress={() => {
+          navigation.navigate('AddHistory');
+        }}>
+        <Image source={require('../../assets/images/plus.png')} />
       </Button>
     </Wrapper>
   );

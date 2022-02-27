@@ -31,7 +31,7 @@ export default function Splash({navigation}) {
 
   return (
     <Container>
-      <LogoImg source={require('../assets/images/logo.png')} />
+      <LogoImg source={require('../../assets/images/logo.png')} />
       <AppName>YOUNGMO</AppName>
     </Container>
   );
