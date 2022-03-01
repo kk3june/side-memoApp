@@ -9,7 +9,7 @@ const FontText = styled.Text`
 export default function Font100(props) {
   return (
     <View>
-      <FontText>{props.manager}</FontText>
+      <FontText>{props.text}</FontText>
     </View>
   );
 }
