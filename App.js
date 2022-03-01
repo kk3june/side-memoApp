@@ -5,6 +5,7 @@ import Splash from './src/components/pages/splash';
 import List from './src/components/pages/list';
 import Content from './src/components/pages/content';
 import AddHistory from './src/components/pages/add-history';
+import EditHistory from './src/components/pages/edit-history';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Screen name="List" component={List} />
         <Stack.Screen name="Content" component={Content} />
         <Stack.Screen name="AddHistory" component={AddHistory} />
+        <Stack.Screen name="EditHistory" component={EditHistory} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -81,6 +81,13 @@ const HistoryHeader = styled.View`
   border: 1px solid #ffcb7d;
 `;
 
+const HistoryHeaderText = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 23px;
+  color: #333;
+`;
+
 const History = styled.View`
   padding: 14px 10px;
   border-bottom-width: 1px;
@@ -111,14 +118,17 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export default function Content() {
+export default function Content({navigation}) {
   return (
     <Wrapper>
       <Section>
         <Header>
           <ItemHeaderWrapper>
             <ItemHeader>고아랑 정형외과</ItemHeader>
-            <EditInfo>
+            <EditInfo
+              onPress={() => {
+                navigation.navigate('EditHistory');
+              }}>
               <Image source={require('../../assets/images/edit.png')} />
             </EditInfo>
           </ItemHeaderWrapper>
@@ -143,7 +153,7 @@ export default function Content() {
           />
         </MemoWrapper>
         <HistoryHeader>
-          <Text>히스토리</Text>
+          <HistoryHeaderText>히스토리</HistoryHeaderText>
         </HistoryHeader>
         <History>
           <HistoryDate>2022.02.03</HistoryDate>
