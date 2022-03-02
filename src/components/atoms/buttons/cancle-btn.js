@@ -15,9 +15,9 @@ const ButtonText = styled.Text`
   color: #656565;
 `;
 
-export default function CancleBtn() {
+export default function CancleBtn(props) {
   return (
-    <ButtonWrpper>
+    <ButtonWrpper onPress={() => props.callback.handlePopup()}>
       <ButtonText>취소</ButtonText>
     </ButtonWrpper>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Font50 from '../atoms/fonts/font50';
 import CancleBtn from '../atoms/buttons/cancle-btn';
@@ -43,21 +43,42 @@ const BtnWrapper = styled.View`
 `;
 const Space = styled.View`
   width: 100%;
-  height: 37px;
+  height: 37px; s
 `;
 
-export default function MarkWrapper() {
+export default function Mark(props) {
+  const [confirmDel, setConfirmDel] = useState(false);
+
+  const handleConfirmDel = () => {
+    setConfirmDel(true);
+  };
+
   return (
     <Wrapper>
       <MarkImg source={require('../../assets/images/mark.png')} />
-      {/* <MarkTextBold>선택된 내용을 삭제합니다.</MarkTextBold>
-      <Font50 text="삭제된 내용은 복구할 수 없습니다." /> */}
-      <MarkTextBold>삭제 되었습니다.</MarkTextBold>
-      <Space />
+      {confirmDel !== true ? (
+        <>
+          <MarkTextBold>선택된 내용을 삭제합니다.</MarkTextBold>
+          <Font50 text="삭제된 내용은 복구할 수 없습니다." />
+        </>
+      ) : (
+        <>
+          <MarkTextBold>삭제 되었습니다.</MarkTextBold>
+          <Space />
+        </>
+      )}
+
       <BtnWrapper>
-        {/* <CancleBtn />
-        <DeleteBtn /> */}
-        <ConfirmBtn />
+        {confirmDel !== true ? (
+          <>
+            <CancleBtn callback={props} />
+            <DeleteBtn callback={handleConfirmDel} />
+          </>
+        ) : (
+          <>
+            <ConfirmBtn callback={props} />
+          </>
+        )}
       </BtnWrapper>
     </Wrapper>
   );

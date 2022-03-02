@@ -15,9 +15,9 @@ const ButtonText = styled.Text`
   color: #fff;
 `;
 
-export default function DeleteBtn() {
+export default function DeleteBtn(props) {
   return (
-    <ButtonWrpper>
+    <ButtonWrpper onPress={() => props.callback()}>
       <ButtonText>삭제</ButtonText>
     </ButtonWrpper>
   );

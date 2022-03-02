@@ -17,9 +17,9 @@ const ButtonText = styled.Text`
   text-align: center;
 `;
 
-export default function ConfirmBtn() {
+export default function ConfirmBtn(props) {
   return (
-    <ButtonWrpper>
+    <ButtonWrpper onPress={() => props.callback.handlePopup()}>
       <ButtonText>확인</ButtonText>
     </ButtonWrpper>
   );

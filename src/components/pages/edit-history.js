@@ -88,6 +88,12 @@ const EditHistoryItem = styled.View`
 `;
 
 export default function EditHistory({navigation}) {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handlePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
     <Wrapper>
       <Section>
@@ -96,7 +102,7 @@ export default function EditHistory({navigation}) {
             <HistoryHeaderText>히스토리</HistoryHeaderText>
           </View>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handlePopup}>
               <DeleteText>삭제</DeleteText>
             </TouchableOpacity>
           </View>
@@ -138,7 +144,7 @@ export default function EditHistory({navigation}) {
           </History>
         </EditHistoryItem>
       </Section>
-      <Mark />
+      {showPopup && <Mark handlePopup={handlePopup} />}
     </Wrapper>
   );
 }
