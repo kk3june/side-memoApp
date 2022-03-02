@@ -1,6 +1,7 @@
 import React from 'react';
-import {Image, Text} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
+import Font100 from '../atoms/fonts/font100';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -77,8 +78,20 @@ const MemoContent = styled.TextInput`
 `;
 
 const HistoryHeader = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 14px 10px;
   border: 1px solid #ffcb7d;
+`;
+
+const HistoryHeaderText = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 23px;
+  color: #333;
 `;
 
 const History = styled.View`
@@ -99,7 +112,7 @@ const HistoryContent = styled.Text`
   color: #333333;
 `;
 
-const Button = styled.TouchableOpacity`
+const TouchBtn = styled.TouchableOpacity`
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -111,14 +124,17 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export default function Content() {
+export default function Content({navigation}) {
   return (
     <Wrapper>
       <Section>
         <Header>
           <ItemHeaderWrapper>
             <ItemHeader>고아랑 정형외과</ItemHeader>
-            <EditInfo>
+            <EditInfo
+              onPress={() => {
+                navigation.navigate('EditInfo');
+              }}>
               <Image source={require('../../assets/images/edit.png')} />
             </EditInfo>
           </ItemHeaderWrapper>
@@ -143,7 +159,13 @@ export default function Content() {
           />
         </MemoWrapper>
         <HistoryHeader>
-          <Text>히스토리</Text>
+          <HistoryHeaderText>히스토리</HistoryHeaderText>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('EditHistory');
+            }}>
+            <Font100 text="편집" />
+          </TouchableOpacity>
         </HistoryHeader>
         <History>
           <HistoryDate>2022.02.03</HistoryDate>
@@ -153,9 +175,12 @@ export default function Content() {
           </HistoryContent>
         </History>
       </Section>
-      <Button>
+      <TouchBtn
+        onPress={() => {
+          navigation.navigate('AddHistory');
+        }}>
         <Image source={require('../../assets/images/pencil.png')} />
-      </Button>
+      </TouchBtn>
     </Wrapper>
   );
 }
