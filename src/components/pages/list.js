@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components';
+import data from '../../assets/mock/hospital.json';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -89,25 +90,31 @@ export default function List({navigation}) {
         <Spell>
           <SpellText>ㄱ</SpellText>
         </Spell>
-        <ListItem onPress={() => navigation.navigate('Content')}>
-          <ItemHeader>고아랑 정형외과</ItemHeader>
-          <ItemBottom>
-            <Left>
-              <Info>
-                <InfoText>고아랑</InfoText>
-              </Info>
-              <Info>
-                <InfoText>010-1234-1234</InfoText>
-              </Info>
-              <Info>
-                <InfoText>02-942-2314</InfoText>
-              </Info>
-            </Left>
-            <Right>
-              <InfoText>2022.02.16</InfoText>
-            </Right>
-          </ItemBottom>
-        </ListItem>
+        {data.map(item => {
+          return (
+            <ListItem
+              key={item.ix}
+              onPress={() => navigation.navigate('Content', {ix: item.ix})}>
+              <ItemHeader>{item.name}</ItemHeader>
+              <ItemBottom>
+                <Left>
+                  <Info>
+                    <InfoText>{item.manager}</InfoText>
+                  </Info>
+                  <Info>
+                    <InfoText>{item.contact1}</InfoText>
+                  </Info>
+                  <Info>
+                    <InfoText>{item.contact2}</InfoText>
+                  </Info>
+                </Left>
+                <Right>
+                  <InfoText>{item.regDt}</InfoText>
+                </Right>
+              </ItemBottom>
+            </ListItem>
+          );
+        })}
       </ListSection>
       <Button
         onPress={() => {
