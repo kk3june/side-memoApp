@@ -118,7 +118,7 @@ export default function List({navigation}) {
       </ListSection>
       <Button
         onPress={() => {
-          navigation.navigate('AddHistory');
+          navigation.navigate('AddInfo');
         }}>
         <Image source={require('../../assets/images/plus.png')} />
       </Button>
