@@ -1,7 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {Image} from 'react-native';
 import styled from 'styled-components';
-import data from '../../assets/mock/hospital.json';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -84,37 +84,45 @@ const Button = styled.TouchableOpacity`
 `;
 
 export default function List({navigation}) {
+  const [list, setList] = useState();
+  useEffect(() => {
+    axios
+      .get('http://34.226.249.72:8080/api/hospital/list?uuid=D4F1DFD222CZZ')
+      .then(res => setList(res.data));
+  }, []);
+
   return (
     <Wrapper>
       <ListSection>
         <Spell>
           <SpellText>ㄱ</SpellText>
         </Spell>
-        {data.map(item => {
-          return (
-            <ListItem
-              key={item.ix}
-              onPress={() => navigation.navigate('Content', {ix: item.ix})}>
-              <ItemHeader>{item.name}</ItemHeader>
-              <ItemBottom>
-                <Left>
-                  <Info>
-                    <InfoText>{item.manager}</InfoText>
-                  </Info>
-                  <Info>
-                    <InfoText>{item.contact1}</InfoText>
-                  </Info>
-                  <Info>
-                    <InfoText>{item.contact2}</InfoText>
-                  </Info>
-                </Left>
-                <Right>
-                  <InfoText>{item.regDt}</InfoText>
-                </Right>
-              </ItemBottom>
-            </ListItem>
-          );
-        })}
+        {list &&
+          list.map(item => {
+            return (
+              <ListItem
+                key={item.ix}
+                onPress={() => navigation.navigate('Content', {ix: item.ix})}>
+                <ItemHeader>{item.name}</ItemHeader>
+                <ItemBottom>
+                  <Left>
+                    <Info>
+                      <InfoText>{item.manager}</InfoText>
+                    </Info>
+                    <Info>
+                      <InfoText>{item.contact1}</InfoText>
+                    </Info>
+                    <Info>
+                      <InfoText>{item.contact2}</InfoText>
+                    </Info>
+                  </Left>
+                  <Right>
+                    <InfoText>{item.regDt}</InfoText>
+                  </Right>
+                </ItemBottom>
+              </ListItem>
+            );
+          })}
       </ListSection>
       <Button
         onPress={() => {
