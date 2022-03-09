@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import Font100 from '../atoms/fonts/font100';
+import axios from 'axios';
 
 const Wrapper = styled.View`
   width: 100%;
@@ -124,13 +125,27 @@ const TouchBtn = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export default function Content({navigation}) {
-  return (
+export default function Content({route, navigation}) {
+  const [isLoading, setLoading] = useState(false);
+  const [content, setContent] = useState();
+  const ix = route.params.ix;
+
+  useEffect(() => {
+    axios.get(`http://34.226.249.72:8080/api/hospital/${ix}`).then(res => {
+      setContent(res.data);
+      setLoading(true);
+    });
+  }, [ix]);
+
+  console.log(isLoading);
+  console.log(content);
+
+  return isLoading ? (
     <Wrapper>
       <Section>
         <Header>
           <ItemHeaderWrapper>
-            <ItemHeader>고아랑 정형외과</ItemHeader>
+            <ItemHeader>{content.name}</ItemHeader>
             <EditInfo
               onPress={() => {
                 navigation.navigate('EditInfo');
@@ -140,13 +155,13 @@ export default function Content({navigation}) {
           </ItemHeaderWrapper>
           <ItemBottom>
             <Info>
-              <InfoText>고아랑</InfoText>
+              <InfoText>{content.manager}</InfoText>
             </Info>
             <Info>
-              <InfoText>010-1234-1234</InfoText>
+              <InfoText>{content.contact1}</InfoText>
             </Info>
             <Info>
-              <InfoText>02-942-2314</InfoText>
+              <InfoText>{content.contact2}</InfoText>
             </Info>
           </ItemBottom>
         </Header>
@@ -182,5 +197,7 @@ export default function Content({navigation}) {
         <Image source={require('../../assets/images/pencil.png')} />
       </TouchBtn>
     </Wrapper>
+  ) : (
+    <Text>isLoading..</Text>
   );
 }

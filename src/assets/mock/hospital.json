@@ -1,7 +1,3 @@
-```jsx
-GET http://{host}/api/hospital/list?uuid={uuid}
-
-#응답
 [
   {
     "ix": 1,
@@ -36,4 +32,3 @@ GET http://{host}/api/hospital/list?uuid={uuid}
     "uptDt": "2022-02-09T00:00:00"
   }
 ]
-```

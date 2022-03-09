@@ -6,7 +6,7 @@ import List from './src/components/pages/list';
 import Content from './src/components/pages/content';
 import AddHistory from './src/components/pages/add-history';
 import EditHistory from './src/components/pages/edit-history';
-import EditInfo from './src/components/pages/edit-info';
+import AddInfo from './src/components/pages/add-info';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,10 +16,10 @@ export default function App() {
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="List" component={List} />
+        <Stack.Screen name="AddInfo" component={AddInfo} />
         <Stack.Screen name="Content" component={Content} />
         <Stack.Screen name="AddHistory" component={AddHistory} />
         <Stack.Screen name="EditHistory" component={EditHistory} />
-        <Stack.Screen name="EditInfo" component={EditInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );
