@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Text, TouchableOpacity} from 'react-native';
+import {Image, View, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import Font100 from '../atoms/fonts/font100';
 import axios from 'axios';
@@ -128,17 +128,33 @@ const TouchBtn = styled.TouchableOpacity`
 export default function Content({route, navigation}) {
   const [isLoading, setLoading] = useState(false);
   const [content, setContent] = useState();
+  const [memoList, setMemoList] = useState();
   const ix = route.params.ix;
 
   useEffect(() => {
-    axios.get(`http://34.226.249.72:8080/api/hospital/${ix}`).then(res => {
-      setContent(res.data);
-      setLoading(true);
-    });
+    axios
+      .get(`http://34.226.249.72:8080/api/hospital/${ix}`)
+      .then(res => {
+        setContent(res.data);
+        setLoading(true);
+      })
+      .catch(err => console.log('up ' + err));
   }, [ix]);
 
-  console.log(isLoading);
-  console.log(content);
+  useEffect(() => {
+    const asyncFunc = async () => {
+      await axios
+        .get(
+          `http://34.226.249.72:8080/api/hospital/memo/list?uuid=D4F1DFD222CZZ&hospitalId=${ix}`,
+        )
+        .then(res => {
+          setMemoList(res.data);
+        })
+        .catch(err => console.log('down ' + err));
+    };
+
+    asyncFunc();
+  }, [ix]);
 
   return isLoading ? (
     <Wrapper>
@@ -167,11 +183,9 @@ export default function Content({route, navigation}) {
         </Header>
         <MemoWrapper>
           <MemoTitle>메모</MemoTitle>
-          <MemoContent
-            value="원장 생일 : 02/10, 와이프생일 : 05/11 결혼기념일 : 11/10 딸 22년에
-              중학교 입학"
-            multiline={true}
-          />
+          <MemoContent multiline={true}>
+            {memoList && memoList[0].memo}
+          </MemoContent>
         </MemoWrapper>
         <HistoryHeader>
           <HistoryHeaderText>히스토리</HistoryHeaderText>
@@ -182,22 +196,28 @@ export default function Content({route, navigation}) {
             <Font100 text="편집" />
           </TouchableOpacity>
         </HistoryHeader>
-        <History>
-          <HistoryDate>2022.02.03</HistoryDate>
-          <HistoryContent>
-            주며, 뭇 위하여서, 우리는 가지에 끓는 무엇이 가는 이 것이다. 얼음이
-            방황하여도, 황금시대의 얼음에
-          </HistoryContent>
-        </History>
+        {memoList &&
+          memoList
+            .filter((filterEl, idx) => idx > 0)
+            .map(el => {
+              return (
+                <History key={el.ix}>
+                  <HistoryDate>{el.regDt}</HistoryDate>
+                  <HistoryContent>{el.memo}</HistoryContent>
+                </History>
+              );
+            })}
       </Section>
       <TouchBtn
         onPress={() => {
-          navigation.navigate('AddHistory');
+          navigation.navigate('AddHistory', {
+            name: content.name,
+          });
         }}>
         <Image source={require('../../assets/images/pencil.png')} />
       </TouchBtn>
     </Wrapper>
   ) : (
-    <Text>isLoading..</Text>
+    <View />
   );
 }
