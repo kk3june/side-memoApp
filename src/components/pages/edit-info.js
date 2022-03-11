@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {useState} from 'react';
+import {TouchableOpacity, Text} from 'react-native';
 import styled from 'styled-components';
 
 const Wrapper = styled.View`
@@ -80,16 +81,16 @@ export default function AddInfo() {
 
   const handleSave = () => {
     console.log(info);
-    axios
-      .put('http://34.226.249.72:8080/api/hospital', {
-        info,
-      })
-      .then(function (response) {
-        console.log('get res' + JSON.stringify(response));
-      })
-      .catch(function (error) {
-        console.log('get error' + error);
-      });
+    // axios
+    //   .put('http://34.226.249.72:8080/api/hospital', {
+    //     info,
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   };
 
   return (
@@ -136,7 +137,7 @@ export default function AddInfo() {
           onChangeText={text => handleInput('memo', text)}
         />
       </Section>
-      <SaveBtn onPress={() => handleSave()}>
+      <SaveBtn onPress={() => handleSave}>
         <SaveBtnTitle>저장</SaveBtnTitle>
       </SaveBtn>
     </Wrapper>
