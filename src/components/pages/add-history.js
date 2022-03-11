@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.View`
@@ -68,7 +69,44 @@ const SaveBtnTitle = styled.Text`
   color: #ffffff;
 `;
 
-export default function AddHistory() {
+export default function AddHistory({route}) {
+  const [paramName, setParamName] = useState(route.params);
+  const [data, setData] = useState({
+    uuid: 'D4F1DFD222CZZ',
+    hospitalId: 1,
+    memo: '',
+  });
+
+  const onChange = (name, text) => {
+    setData({
+      ...data,
+      [name]: text,
+    });
+  };
+
+  const handleSave = () => {
+    axios
+      .put('http://34.226.249.72/api/hospital/memo', data)
+      .then(res => console.log('success', res))
+      .catch(err => console.log('get error', err));
+  };
+
+  // 날짜 format 2021-03-11
+  function leftPad(value) {
+    if (value >= 10) {
+      return value;
+    }
+    return `0${value}`;
+  }
+  function toStringByFormatting(source, delimiter = '-') {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+    return [year, month, day].join(delimiter);
+  }
+
+  const now = toStringByFormatting(new Date());
+
   return (
     <Wrapper>
       <WrapperHeader>히스토리 입력</WrapperHeader>
@@ -76,17 +114,17 @@ export default function AddHistory() {
         <AddHeader>
           업체명 <Highlight>*</Highlight>
         </AddHeader>
-        <AddInput />
+        <AddInput>{paramName.name}</AddInput>
         <AddHeader>
           작성일 <Highlight>*</Highlight>
         </AddHeader>
-        <AddInput />
+        <AddInput value={now} />
         <AddHeader>
           내용 <Highlight>*</Highlight>
         </AddHeader>
-        <AddContent />
+        <AddContent onChangeText={text => onChange('memo', text)} />
       </Section>
-      <SaveBtn>
+      <SaveBtn onPress={() => handleSave()}>
         <SaveBtnTitle>저장</SaveBtnTitle>
       </SaveBtn>
     </Wrapper>
